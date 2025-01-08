@@ -1,0 +1,38 @@
+{
+  "name": "@nimblebrain/api-spec",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "API Specification for NimbleBrain",
+  "author": "NimbleBrain, Inc. <support@nimblebrain.ai>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "clean": "npx rimraf dist",
+    "prepare": "npm run build",
+    "generate-docs": "ts-node src/generateDocs.ts",
+    "start": "http-server ./docs -p 9000",
+    "version": "git add -A",
+    "postversion": "git push && git push --tags",
+    "release:patch": "npm version patch && npm publish --access public",
+    "release:minor": "npm version minor && npm publish --access public",
+    "release:major": "npm version major && npm publish --access public"
+  },
+  "dependencies": {
+    "@asteasolutions/zod-to-openapi": "^5.5.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "http-server": "^14.1.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
