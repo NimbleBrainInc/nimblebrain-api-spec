@@ -10,3 +10,5 @@ export const ConversationSchema = z
     messages: z.array(MessageSchema).optional(),
   })
   .openapi("Conversation");
+
+export type Conversation = z.infer<typeof ConversationSchema>;

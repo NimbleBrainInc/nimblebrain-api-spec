@@ -6,8 +6,12 @@ export const CreateConversationSchema = z
   })
   .openapi("CreateConversation");
 
+export type CreateConversationRequest = z.infer<typeof CreateConversationSchema>;
+
 export const CreateMessageSchema = z
   .object({
     content: z.string(),
   })
   .openapi("CreateMessage");
+
+export type CreateMessageRequest = z.infer<typeof CreateMessageSchema>;

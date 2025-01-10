@@ -6,3 +6,5 @@ export const AgentSchema = z
     title: z.string(),
   })
   .openapi("Agent");
+
+export type Agent = z.infer<typeof AgentSchema>;
