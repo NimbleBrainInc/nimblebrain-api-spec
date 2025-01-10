@@ -1,6 +1,5 @@
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
-import { createPaginatedResponseSchema } from "../../schemas";
-import { AgentSchema } from "../../schemas/agent.schema";
+import { AgentSchema, createPaginatedResponseSchema } from "../../schemas";
 import { authErrorResponses, paginationParams } from "../common";
 
 export const registerAgentRoutes = (registry: OpenAPIRegistry) => {
