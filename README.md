@@ -47,6 +47,45 @@ All endpoints require authentication using a Bearer token. To authenticate:
 - `GET /agents/:agentUuid/conversations/:conversationUuid/messages` - List conversation messages (paginated)
 - `POST /agents/:agentUuid/conversations/:conversationUuid/messages` - Add a message to a conversation
 
+## Response formats
+
+All API endpoints follow a consistent response format:
+
+### 🛠️ Standard Response
+
+```json
+{
+  "data": T | null,
+  "error": {
+    "id": string,
+    "errorCode": string,
+    "message": string,
+    "details"?: object,
+    "timestamp": string
+  } | null
+}
+```
+
+### Paginated Response
+
+```json
+{
+  "data": {
+    "items": T[],
+    "page": number,
+    "limit": number,
+    "total": number
+  } | null,
+  "error": {
+    "id": string,
+    "errorCode": string,
+    "message": string,
+    "details"?: object,
+    "timestamp": string
+  } | null
+}
+```
+
 ## 💻 Local Development
 
 ### Prerequisites
@@ -93,6 +132,7 @@ src/
 │   ├── conversation.schema.ts
 │   ├── message.schema.ts
 │   ├── pagination.schema.ts
+│   ├── responses.schema.ts   # API response schemas
 │   └── route-params.schema.ts
 ├── routes/                   # API route definitions
 │   ├── agents/

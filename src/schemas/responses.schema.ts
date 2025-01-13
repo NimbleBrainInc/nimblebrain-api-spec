@@ -1,3 +1,4 @@
+import { PaginationQuerySchema } from "./pagination.schema";
 import { z } from "./zodSetup";
 
 // Base error schema
@@ -8,13 +9,6 @@ export const ErrorDetailSchema = z.object({
   details: z.record(z.unknown()).optional(),
   timestamp: z.string().datetime(),
 });
-
-// Create a generic API response schema that can be used with any data type
-export const createAPIResponseSchema = <T extends z.ZodType>(dataSchema: T) =>
-  z.object({
-    data: dataSchema.nullable(),
-    error: ErrorDetailSchema.nullable(),
-  });
 
 // Error code enum as a Zod enum
 export const ErrorCodeEnum = z.enum([
@@ -28,6 +22,31 @@ export const ErrorCodeEnum = z.enum([
   "GENERIC_SERVER_ERROR",
 ]);
 
+export const createPaginatedResponseSchema = <T extends z.ZodType>(schema: T, name: string) => {
+  const paginatedSchema = z
+    .object({
+      items: z.array(schema),
+      page: PaginationQuerySchema.shape.page,
+      limit: PaginationQuerySchema.shape.limit,
+      total: z.number().int().min(0),
+    })
+    .openapi(`Paginated${name}`);
+
+  return createAPIResponseSchema(paginatedSchema);
+};
+
+export const createAPIResponseSchema = <T extends z.ZodType>(dataSchema: T) =>
+  z.object({
+    data: dataSchema.nullable(),
+    error: ErrorDetailSchema.nullable(),
+  });
+
 export type ErrorCode = z.infer<typeof ErrorCodeEnum>;
 export type ErrorDetail = z.infer<typeof ErrorDetailSchema>;
 export type APIResponse<T> = z.infer<ReturnType<typeof createAPIResponseSchema<z.ZodType<T>>>>;
+export type PaginatedResponse<T> = APIResponse<{
+  items: T[];
+  page: number;
+  limit: number;
+  total: number;
+}>;
