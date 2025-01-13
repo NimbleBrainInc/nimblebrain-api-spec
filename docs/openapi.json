@@ -32,7 +32,12 @@
             "type": "string",
             "format": "uuid"
           },
-          "errorCode": {
+          "status": {
+            "type": "integer",
+            "minimum": 400,
+            "maximum": 599
+          },
+          "code": {
             "type": "string"
           },
           "message": {
@@ -51,7 +56,8 @@
         },
         "required": [
           "id",
-          "errorCode",
+          "status",
+          "code",
           "message",
           "timestamp"
         ]
@@ -60,13 +66,27 @@
         "type": "string",
         "enum": [
           "UNAUTHORIZED",
+          "INVALID_CREDENTIALS",
+          "TOKEN_EXPIRED",
           "FORBIDDEN",
+          "INSUFFICIENT_PERMISSIONS",
           "NOT_FOUND",
+          "ALREADY_EXISTS",
+          "CONFLICT",
           "VALIDATION_ERROR",
+          "INVALID_INPUT",
+          "MISSING_REQUIRED_FIELD",
+          "INVALID_FORMAT",
           "RATE_LIMIT_EXCEEDED",
-          "GENERIC_ERROR",
-          "GENERIC_CLIENT_ERROR",
-          "GENERIC_SERVER_ERROR"
+          "QUOTA_EXCEEDED",
+          "INTERNAL_ERROR",
+          "SERVICE_UNAVAILABLE",
+          "DATABASE_ERROR",
+          "EXTERNAL_SERVICE_ERROR",
+          "DATA_CORRUPTION",
+          "INCONSISTENT_STATE",
+          "BAD_REQUEST",
+          "UNEXPECTED_ERROR"
         ]
       },
       "PaginationQuery": {
@@ -344,7 +364,12 @@
                           "type": "string",
                           "format": "uuid"
                         },
-                        "errorCode": {
+                        "status": {
+                          "type": "integer",
+                          "minimum": 400,
+                          "maximum": 599
+                        },
+                        "code": {
                           "type": "string"
                         },
                         "message": {
@@ -363,7 +388,8 @@
                       },
                       "required": [
                         "id",
-                        "errorCode",
+                        "status",
+                        "code",
                         "message",
                         "timestamp"
                       ]
@@ -384,32 +410,58 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            400
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "BAD_REQUEST",
+                            "VALIDATION_ERROR",
+                            "INVALID_INPUT",
+                            "MISSING_REQUIRED_FIELD",
+                            "INVALID_FORMAT"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -422,32 +474,56 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            401
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "UNAUTHORIZED",
+                            "INVALID_CREDENTIALS",
+                            "TOKEN_EXPIRED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -460,32 +536,55 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            403
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "FORBIDDEN",
+                            "INSUFFICIENT_PERMISSIONS"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -498,32 +597,54 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            404
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "NOT_FOUND"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -536,32 +657,55 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            429
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "RATE_LIMIT_EXCEEDED",
+                            "QUOTA_EXCEEDED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -574,32 +718,119 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            500
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "INTERNAL_ERROR",
+                            "DATABASE_ERROR",
+                            "DATA_CORRUPTION",
+                            "INCONSISTENT_STATE",
+                            "UNEXPECTED_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            503
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "SERVICE_UNAVAILABLE",
+                            "EXTERNAL_SERVICE_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -665,7 +896,12 @@
                           "type": "string",
                           "format": "uuid"
                         },
-                        "errorCode": {
+                        "status": {
+                          "type": "integer",
+                          "minimum": 400,
+                          "maximum": 599
+                        },
+                        "code": {
                           "type": "string"
                         },
                         "message": {
@@ -684,7 +920,8 @@
                       },
                       "required": [
                         "id",
-                        "errorCode",
+                        "status",
+                        "code",
                         "message",
                         "timestamp"
                       ]
@@ -705,32 +942,58 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            400
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "BAD_REQUEST",
+                            "VALIDATION_ERROR",
+                            "INVALID_INPUT",
+                            "MISSING_REQUIRED_FIELD",
+                            "INVALID_FORMAT"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -743,32 +1006,56 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            401
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "UNAUTHORIZED",
+                            "INVALID_CREDENTIALS",
+                            "TOKEN_EXPIRED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -781,32 +1068,55 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            403
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "FORBIDDEN",
+                            "INSUFFICIENT_PERMISSIONS"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -819,32 +1129,54 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            404
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "NOT_FOUND"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -857,32 +1189,55 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            429
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "RATE_LIMIT_EXCEEDED",
+                            "QUOTA_EXCEEDED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -895,32 +1250,119 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            500
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "INTERNAL_ERROR",
+                            "DATABASE_ERROR",
+                            "DATA_CORRUPTION",
+                            "INCONSISTENT_STATE",
+                            "UNEXPECTED_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            503
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "SERVICE_UNAVAILABLE",
+                            "EXTERNAL_SERVICE_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -976,32 +1418,58 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            400
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "BAD_REQUEST",
+                            "VALIDATION_ERROR",
+                            "INVALID_INPUT",
+                            "MISSING_REQUIRED_FIELD",
+                            "INVALID_FORMAT"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1014,32 +1482,56 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            401
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "UNAUTHORIZED",
+                            "INVALID_CREDENTIALS",
+                            "TOKEN_EXPIRED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1052,32 +1544,55 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            403
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "FORBIDDEN",
+                            "INSUFFICIENT_PERMISSIONS"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1090,32 +1605,54 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            404
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "NOT_FOUND"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1128,32 +1665,55 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            429
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "RATE_LIMIT_EXCEEDED",
+                            "QUOTA_EXCEEDED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1166,32 +1726,119 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            500
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "INTERNAL_ERROR",
+                            "DATABASE_ERROR",
+                            "DATA_CORRUPTION",
+                            "INCONSISTENT_STATE",
+                            "UNEXPECTED_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            503
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "SERVICE_UNAVAILABLE",
+                            "EXTERNAL_SERVICE_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1265,32 +1912,58 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            400
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "BAD_REQUEST",
+                            "VALIDATION_ERROR",
+                            "INVALID_INPUT",
+                            "MISSING_REQUIRED_FIELD",
+                            "INVALID_FORMAT"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1303,32 +1976,56 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            401
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "UNAUTHORIZED",
+                            "INVALID_CREDENTIALS",
+                            "TOKEN_EXPIRED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1341,32 +2038,55 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            403
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "FORBIDDEN",
+                            "INSUFFICIENT_PERMISSIONS"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1379,32 +2099,54 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            404
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "NOT_FOUND"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1417,32 +2159,55 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            429
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "RATE_LIMIT_EXCEEDED",
+                            "QUOTA_EXCEEDED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1455,32 +2220,119 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            500
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "INTERNAL_ERROR",
+                            "DATABASE_ERROR",
+                            "DATA_CORRUPTION",
+                            "INCONSISTENT_STATE",
+                            "UNEXPECTED_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            503
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "SERVICE_UNAVAILABLE",
+                            "EXTERNAL_SERVICE_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1529,32 +2381,58 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            400
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "BAD_REQUEST",
+                            "VALIDATION_ERROR",
+                            "INVALID_INPUT",
+                            "MISSING_REQUIRED_FIELD",
+                            "INVALID_FORMAT"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1567,32 +2445,56 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            401
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "UNAUTHORIZED",
+                            "INVALID_CREDENTIALS",
+                            "TOKEN_EXPIRED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1605,32 +2507,55 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            403
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "FORBIDDEN",
+                            "INSUFFICIENT_PERMISSIONS"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1643,32 +2568,54 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            404
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "NOT_FOUND"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1681,32 +2628,55 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            429
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "RATE_LIMIT_EXCEEDED",
+                            "QUOTA_EXCEEDED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1719,32 +2689,119 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            500
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "INTERNAL_ERROR",
+                            "DATABASE_ERROR",
+                            "DATA_CORRUPTION",
+                            "INCONSISTENT_STATE",
+                            "UNEXPECTED_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            503
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "SERVICE_UNAVAILABLE",
+                            "EXTERNAL_SERVICE_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1819,7 +2876,12 @@
                           "type": "string",
                           "format": "uuid"
                         },
-                        "errorCode": {
+                        "status": {
+                          "type": "integer",
+                          "minimum": 400,
+                          "maximum": 599
+                        },
+                        "code": {
                           "type": "string"
                         },
                         "message": {
@@ -1838,7 +2900,8 @@
                       },
                       "required": [
                         "id",
-                        "errorCode",
+                        "status",
+                        "code",
                         "message",
                         "timestamp"
                       ]
@@ -1859,32 +2922,58 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            400
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "BAD_REQUEST",
+                            "VALIDATION_ERROR",
+                            "INVALID_INPUT",
+                            "MISSING_REQUIRED_FIELD",
+                            "INVALID_FORMAT"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1897,32 +2986,56 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            401
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "UNAUTHORIZED",
+                            "INVALID_CREDENTIALS",
+                            "TOKEN_EXPIRED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1935,32 +3048,55 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            403
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "FORBIDDEN",
+                            "INSUFFICIENT_PERMISSIONS"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -1973,32 +3109,54 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            404
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "NOT_FOUND"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -2011,32 +3169,55 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            429
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "RATE_LIMIT_EXCEEDED",
+                            "QUOTA_EXCEEDED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -2049,32 +3230,119 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            500
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "INTERNAL_ERROR",
+                            "DATABASE_ERROR",
+                            "DATA_CORRUPTION",
+                            "INCONSISTENT_STATE",
+                            "UNEXPECTED_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            503
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "SERVICE_UNAVAILABLE",
+                            "EXTERNAL_SERVICE_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -2139,32 +3407,58 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            400
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "BAD_REQUEST",
+                            "VALIDATION_ERROR",
+                            "INVALID_INPUT",
+                            "MISSING_REQUIRED_FIELD",
+                            "INVALID_FORMAT"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -2177,32 +3471,56 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            401
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "UNAUTHORIZED",
+                            "INVALID_CREDENTIALS",
+                            "TOKEN_EXPIRED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -2215,32 +3533,55 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            403
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "FORBIDDEN",
+                            "INSUFFICIENT_PERMISSIONS"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -2253,32 +3594,54 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            404
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "NOT_FOUND"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -2291,32 +3654,55 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            429
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "RATE_LIMIT_EXCEEDED",
+                            "QUOTA_EXCEEDED"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
                   ]
                 }
               }
@@ -2329,32 +3715,119 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "format": "uuid"
+                    "data": {
+                      "nullable": true
                     },
-                    "errorCode": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    },
-                    "details": {
+                    "error": {
                       "type": "object",
-                      "additionalProperties": {
-                        "nullable": true
-                      }
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            500
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "INTERNAL_ERROR",
+                            "DATABASE_ERROR",
+                            "DATA_CORRUPTION",
+                            "INCONSISTENT_STATE",
+                            "UNEXPECTED_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
                     }
                   },
                   "required": [
-                    "id",
-                    "errorCode",
-                    "message",
-                    "timestamp"
+                    "data",
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "status": {
+                          "type": "number",
+                          "enum": [
+                            503
+                          ]
+                        },
+                        "code": {
+                          "type": "string",
+                          "enum": [
+                            "SERVICE_UNAVAILABLE",
+                            "EXTERNAL_SERVICE_ERROR"
+                          ]
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "nullable": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "status",
+                        "code",
+                        "message",
+                        "timestamp"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "error"
                   ]
                 }
               }
