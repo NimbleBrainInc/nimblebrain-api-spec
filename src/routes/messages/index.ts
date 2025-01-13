@@ -6,10 +6,11 @@ import {
   getPaginationParams,
   getRouteParams,
 } from "../../schemas";
-import { authErrorResponses } from "../common";
+import { registerCommonSchemas } from "../common";
 
 export const registerMessageRoutes = (registry: OpenAPIRegistry) => {
   const routeParams = getRouteParams(registry);
+  const standardErrors = registerCommonSchemas(registry);
 
   // GET /agents/:agentUuid/conversations/:conversationUuid/messages
   registry.registerPath({
@@ -32,7 +33,7 @@ export const registerMessageRoutes = (registry: OpenAPIRegistry) => {
           },
         },
       },
-      ...authErrorResponses,
+      ...standardErrors,
     },
   });
 
@@ -62,7 +63,7 @@ export const registerMessageRoutes = (registry: OpenAPIRegistry) => {
           },
         },
       },
-      ...authErrorResponses,
+      ...standardErrors,
     },
   });
 };

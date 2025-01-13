@@ -8,11 +8,11 @@ import {
   getRouteParams,
   MessageSchema,
 } from "../../schemas";
-import { z } from "../../schemas/zodSetup";
-import { authErrorResponses } from "../common";
+import { registerCommonSchemas } from "../common";
 
 export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
   const routeParams = getRouteParams(registry);
+  const standardErrors = registerCommonSchemas(registry);
 
   // GET /agents/:agentUuid/conversations
   registry.registerPath({
@@ -31,17 +31,7 @@ export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
           },
         },
       },
-      ...authErrorResponses,
-      404: {
-        description: "Agent not found",
-        content: {
-          "application/json": {
-            schema: z.object({
-              error: z.string(),
-            }),
-          },
-        },
-      },
+      ...standardErrors,
     },
   });
 
@@ -71,17 +61,7 @@ export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
           },
         },
       },
-      ...authErrorResponses,
-      404: {
-        description: "Agent not found",
-        content: {
-          "application/json": {
-            schema: z.object({
-              error: z.string(),
-            }),
-          },
-        },
-      },
+      ...standardErrors,
     },
   });
 
@@ -106,17 +86,7 @@ export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
           },
         },
       },
-      ...authErrorResponses,
-      404: {
-        description: "Agent or conversation not found",
-        content: {
-          "application/json": {
-            schema: z.object({
-              error: z.string(),
-            }),
-          },
-        },
-      },
+      ...standardErrors,
     },
   });
 
@@ -141,17 +111,7 @@ export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
           },
         },
       },
-      ...authErrorResponses,
-      404: {
-        description: "Agent or conversation not found",
-        content: {
-          "application/json": {
-            schema: z.object({
-              error: z.string(),
-            }),
-          },
-        },
-      },
+      ...standardErrors,
     },
   });
 
@@ -181,17 +141,7 @@ export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
           },
         },
       },
-      ...authErrorResponses,
-      404: {
-        description: "Agent or conversation not found",
-        content: {
-          "application/json": {
-            schema: z.object({
-              error: z.string(),
-            }),
-          },
-        },
-      },
+      ...standardErrors,
     },
   });
 
@@ -207,17 +157,7 @@ export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
       204: {
         description: "Conversation deleted successfully",
       },
-      ...authErrorResponses,
-      404: {
-        description: "Agent or conversation not found",
-        content: {
-          "application/json": {
-            schema: z.object({
-              error: z.string(),
-            }),
-          },
-        },
-      },
+      ...standardErrors,
     },
   });
 };

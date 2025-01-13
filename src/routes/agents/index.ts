@@ -1,8 +1,10 @@
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 import { AgentSchema, createPaginatedResponseSchema, getPaginationParams } from "../../schemas";
-import { authErrorResponses } from "../common";
+import { registerCommonSchemas } from "../common";
 
 export const registerAgentRoutes = (registry: OpenAPIRegistry) => {
+  const standardErrors = registerCommonSchemas(registry);
+
   registry.registerPath({
     method: "get",
     path: "/agents",
@@ -19,7 +21,7 @@ export const registerAgentRoutes = (registry: OpenAPIRegistry) => {
           },
         },
       },
-      ...authErrorResponses,
+      ...standardErrors,
     },
   });
 };

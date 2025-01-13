@@ -25,6 +25,50 @@
       }
     },
     "schemas": {
+      "ErrorDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "errorCode": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "details": {
+            "type": "object",
+            "additionalProperties": {
+              "nullable": true
+            }
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "errorCode",
+          "message",
+          "timestamp"
+        ]
+      },
+      "ErrorCode": {
+        "type": "string",
+        "enum": [
+          "UNAUTHORIZED",
+          "FORBIDDEN",
+          "NOT_FOUND",
+          "VALIDATION_ERROR",
+          "RATE_LIMIT_EXCEEDED",
+          "GENERIC_ERROR",
+          "GENERIC_CLIENT_ERROR",
+          "GENERIC_SERVER_ERROR"
+        ]
+      },
       "PaginationQuery": {
         "type": "object",
         "properties": {
@@ -289,37 +333,153 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized - No token provided or agent not found",
+          "400": {
+            "description": "Bad Request - Invalid input",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden - Invalid token or token does not match agent",
+            "description": "Forbidden - Insufficient permissions",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
@@ -377,55 +537,153 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized - No token provided or agent not found",
+          "400": {
+            "description": "Bad Request - Invalid input",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden - Invalid token or token does not match agent",
+            "description": "Forbidden - Insufficient permissions",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
             }
           },
           "404": {
-            "description": "Agent not found",
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
@@ -474,55 +732,153 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized - No token provided or agent not found",
+          "400": {
+            "description": "Bad Request - Invalid input",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden - Invalid token or token does not match agent",
+            "description": "Forbidden - Insufficient permissions",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
             }
           },
           "404": {
-            "description": "Agent not found",
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
@@ -589,55 +945,153 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized - No token provided or agent not found",
+          "400": {
+            "description": "Bad Request - Invalid input",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden - Invalid token or token does not match agent",
+            "description": "Forbidden - Insufficient permissions",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
             }
           },
           "404": {
-            "description": "Agent or conversation not found",
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
@@ -679,55 +1133,153 @@
           "204": {
             "description": "Conversation deleted successfully"
           },
-          "401": {
-            "description": "Unauthorized - No token provided or agent not found",
+          "400": {
+            "description": "Bad Request - Invalid input",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden - Invalid token or token does not match agent",
+            "description": "Forbidden - Insufficient permissions",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
             }
           },
           "404": {
-            "description": "Agent or conversation not found",
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
@@ -794,37 +1346,153 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized - No token provided or agent not found",
+          "400": {
+            "description": "Bad Request - Invalid input",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden - Invalid token or token does not match agent",
+            "description": "Forbidden - Insufficient permissions",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
@@ -882,37 +1550,153 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized - No token provided or agent not found",
+          "400": {
+            "description": "Bad Request - Invalid input",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden - Invalid token or token does not match agent",
+            "description": "Forbidden - Insufficient permissions",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
                       "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "required": [
-                    "error"
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "errorCode": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "errorCode",
+                    "message",
+                    "timestamp"
                   ]
                 }
               }
