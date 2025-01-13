@@ -2,7 +2,7 @@ import { z } from "./zodSetup";
 
 export const CreateConversationSchema = z
   .object({
-    content: z.string(),
+    text: z.string(),
   })
   .openapi("CreateConversation");
 
@@ -10,7 +10,7 @@ export type CreateConversationRequest = z.infer<typeof CreateConversationSchema>
 
 export const CreateMessageSchema = z
   .object({
-    content: z.string(),
+    text: z.string(),
   })
   .openapi("CreateMessage");
 

@@ -186,7 +186,7 @@
           "isSystem": {
             "type": "boolean"
           },
-          "content": {
+          "text": {
             "type": "string"
           },
           "dateCreated": {
@@ -196,7 +196,7 @@
         "required": [
           "id",
           "isSystem",
-          "content",
+          "text",
           "dateCreated"
         ]
       },
@@ -263,12 +263,12 @@
       "CreateConversation": {
         "type": "object",
         "properties": {
-          "content": {
+          "text": {
             "type": "string"
           }
         },
         "required": [
-          "content"
+          "text"
         ]
       },
       "PaginatedMessages": {
@@ -304,12 +304,12 @@
       "CreateMessage": {
         "type": "object",
         "properties": {
-          "content": {
+          "text": {
             "type": "string"
           }
         },
         "required": [
-          "content"
+          "text"
         ]
       }
     },
