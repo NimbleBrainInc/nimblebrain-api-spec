@@ -4,10 +4,11 @@ import {
   CreateConversationSchema,
   CreateMessageSchema,
   createPaginatedResponseSchema,
+  getPaginationParams,
   MessageSchema,
 } from "../../schemas";
 import { z } from "../../schemas/zodSetup";
-import { authErrorResponses, paginationParams, routeParams } from "../common";
+import { authErrorResponses, routeParams } from "../common";
 
 export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
   // GET /agents/:agentUuid/conversations
@@ -17,7 +18,7 @@ export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
     security: [{ bearerAuth: [] }],
     summary: "List agent conversations",
     tags: ["Conversations"],
-    parameters: [...routeParams.agent, ...paginationParams],
+    parameters: [...routeParams.agent, ...getPaginationParams(registry)],
     responses: {
       200: {
         description: "List of conversations retrieved successfully",
@@ -88,7 +89,11 @@ export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
     security: [{ bearerAuth: [] }],
     summary: "Retrieves a single conversation",
     tags: ["Conversations"],
-    parameters: [...routeParams.agent, ...routeParams.conversation, ...paginationParams],
+    parameters: [
+      ...routeParams.agent,
+      ...routeParams.conversation,
+      ...getPaginationParams(registry),
+    ],
     responses: {
       200: {
         description: "Conversation retrieved successfully",
@@ -119,7 +124,11 @@ export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
     security: [{ bearerAuth: [] }],
     summary: "List conversation messages",
     tags: ["Messages"],
-    parameters: [...routeParams.agent, ...routeParams.conversation, ...paginationParams],
+    parameters: [
+      ...routeParams.agent,
+      ...routeParams.conversation,
+      ...getPaginationParams(registry),
+    ],
     responses: {
       200: {
         description: "Messages retrieved successfully",

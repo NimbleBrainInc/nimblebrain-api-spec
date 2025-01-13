@@ -1,3 +1,4 @@
+import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 import { z } from "./zodSetup";
 
 export const PaginationQuerySchema = z
@@ -11,9 +12,29 @@ export const PaginationQuerySchema = z
       .default("10")
       .transform((val) => Number(val)),
   })
-  .openapi("Message");
+  .openapi("PaginationQuery");
 
 export type PaginationQuery = z.infer<typeof PaginationQuerySchema>;
+
+// Helper function to get pagination parameters
+export const getPaginationParams = (registry: OpenAPIRegistry) => {
+  registry.register("PaginationQuery", PaginationQuerySchema);
+
+  return [
+    {
+      name: "page",
+      in: "query" as const,
+      required: false,
+      schema: { $ref: "#/components/schemas/PaginationQuery/properties/page" },
+    },
+    {
+      name: "limit",
+      in: "query" as const,
+      required: false,
+      schema: { $ref: "#/components/schemas/PaginationQuery/properties/limit" },
+    },
+  ] as const;
+};
 
 export const createPaginatedResponseSchema = <T extends z.ZodType>(schema: T, name: string) => {
   return z

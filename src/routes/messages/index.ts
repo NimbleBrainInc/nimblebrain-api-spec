@@ -1,6 +1,11 @@
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
-import { CreateMessageSchema, MessageSchema, createPaginatedResponseSchema } from "../../schemas";
-import { authErrorResponses, paginationParams, routeParams } from "../common";
+import {
+  CreateMessageSchema,
+  MessageSchema,
+  createPaginatedResponseSchema,
+  getPaginationParams,
+} from "../../schemas";
+import { authErrorResponses, routeParams } from "../common";
 
 export const registerMessageRoutes = (registry: OpenAPIRegistry) => {
   // GET /agents/:agentUuid/conversations/:conversationUuid/messages
@@ -10,7 +15,11 @@ export const registerMessageRoutes = (registry: OpenAPIRegistry) => {
     security: [{ bearerAuth: [] }],
     summary: "List conversation messages",
     tags: ["Messages"],
-    parameters: [...routeParams.agent, ...routeParams.conversation, ...paginationParams],
+    parameters: [
+      ...routeParams.agent,
+      ...routeParams.conversation,
+      ...getPaginationParams(registry),
+    ],
     responses: {
       200: {
         description: "Messages retrieved successfully",

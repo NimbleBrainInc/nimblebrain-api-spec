@@ -23,30 +23,6 @@ export const authErrorResponses = {
   },
 };
 
-export const paginationParams = [
-  {
-    name: "page",
-    in: "query" as const,
-    required: false,
-    schema: {
-      type: "integer" as const,
-      minimum: 1,
-      default: 1,
-    },
-  },
-  {
-    name: "pageSize",
-    in: "query" as const,
-    required: false,
-    schema: {
-      type: "integer" as const,
-      minimum: 1,
-      maximum: 100,
-      default: 20,
-    },
-  },
-] as const;
-
 export const routeParams = {
   agent: [
     {

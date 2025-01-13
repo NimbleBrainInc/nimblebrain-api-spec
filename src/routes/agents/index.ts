@@ -1,6 +1,6 @@
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
-import { AgentSchema, createPaginatedResponseSchema } from "../../schemas";
-import { authErrorResponses, paginationParams } from "../common";
+import { AgentSchema, createPaginatedResponseSchema, getPaginationParams } from "../../schemas";
+import { authErrorResponses } from "../common";
 
 export const registerAgentRoutes = (registry: OpenAPIRegistry) => {
   registry.registerPath({
@@ -9,7 +9,7 @@ export const registerAgentRoutes = (registry: OpenAPIRegistry) => {
     security: [{ bearerAuth: [] }],
     summary: "List all agents",
     tags: ["Agents"],
-    parameters: [...paginationParams],
+    parameters: [...getPaginationParams(registry)],
     responses: {
       200: {
         description: "List of agents retrieved successfully",

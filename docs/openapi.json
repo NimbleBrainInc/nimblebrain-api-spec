@@ -25,6 +25,23 @@
       }
     },
     "schemas": {
+      "PaginationQuery": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "string",
+            "default": "1"
+          },
+          "limit": {
+            "type": "string",
+            "default": "10"
+          }
+        },
+        "required": [
+          "page",
+          "limit"
+        ]
+      },
       "Agent": {
         "type": "object",
         "properties": {
@@ -77,6 +94,9 @@
             "type": "string",
             "format": "uuid"
           },
+          "isSystem": {
+            "type": "boolean"
+          },
           "content": {
             "type": "string"
           },
@@ -86,6 +106,7 @@
         },
         "required": [
           "id",
+          "isSystem",
           "content",
           "dateCreated"
         ]
@@ -221,20 +242,15 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "default": 1
+              "$ref": "#/components/schemas/PaginationQuery/properties/page"
             }
           },
           {
-            "name": "pageSize",
+            "name": "limit",
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 100,
-              "default": 20
+              "$ref": "#/components/schemas/PaginationQuery/properties/limit"
             }
           }
         ],
@@ -315,20 +331,15 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "default": 1
+              "$ref": "#/components/schemas/PaginationQuery/properties/page"
             }
           },
           {
-            "name": "pageSize",
+            "name": "limit",
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 100,
-              "default": 20
+              "$ref": "#/components/schemas/PaginationQuery/properties/limit"
             }
           }
         ],
@@ -535,20 +546,15 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "default": 1
+              "$ref": "#/components/schemas/PaginationQuery/properties/page"
             }
           },
           {
-            "name": "pageSize",
+            "name": "limit",
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 100,
-              "default": 20
+              "$ref": "#/components/schemas/PaginationQuery/properties/limit"
             }
           }
         ],
@@ -749,20 +755,15 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "default": 1
+              "$ref": "#/components/schemas/PaginationQuery/properties/page"
             }
           },
           {
-            "name": "pageSize",
+            "name": "limit",
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 100,
-              "default": 20
+              "$ref": "#/components/schemas/PaginationQuery/properties/limit"
             }
           }
         ],
