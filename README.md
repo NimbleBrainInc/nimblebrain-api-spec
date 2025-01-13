@@ -12,6 +12,8 @@ available endpoints, request/response schemas, and authentication requirements.
 - Bearer token authentication
 - Detailed request/response examples
 - Built with TypeScript
+- Pagination support
+- Error handling standardization
 
 ## 📖 API Documentation
 
@@ -28,12 +30,22 @@ All endpoints require authentication using a Bearer token. To authenticate:
 
 ### Conversations
 
+### Agents
+
+- `GET /agents` - List all agents (paginated)
+- `GET /agents/:agentUuid` - Get a specific agent
+
+### Conversations
+
 - `GET /agents/:agentUuid/conversations` - List agent conversations (paginated)
 - `POST /agents/:agentUuid/conversations` - Create a new conversation
-- `GET /agents/:agentUuid/conversations/:conversationUuid/messages` - Gets a single conversation
-- `GET /agents/:agentUuid/conversations/:conversationUuid/messages` - List conversation messages (paginated)
-- `POST /agents/:agentUuid/conversations/:conversationUuid` - Add a message to a conversation
+- `GET /agents/:agentUuid/conversations/:conversationUuid` - Get conversation details
 - `DELETE /agents/:agentUuid/conversations/:conversationUuid` - Delete a conversation
+
+### Messages
+
+- `GET /agents/:agentUuid/conversations/:conversationUuid/messages` - List conversation messages (paginated)
+- `POST /agents/:agentUuid/conversations/:conversationUuid/messages` - Add a message to a conversation
 
 ## 💻 Local Development
 
@@ -47,7 +59,7 @@ All endpoints require authentication using a Bearer token. To authenticate:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/nimblebrain-api-spec.git
+git clone https://github.com/NimbleBrainInc/nimblebrain-api-spec.git
 cd nimblebrain-api-spec
 ```
 
@@ -75,29 +87,34 @@ The SwaggerUI will be available at `http://localhost:9000`
 
 ```
 src/
-├── schemas/          # Zod schema definitions
-│   ├── zodSetup.ts   # Zod configuration
-│   ├── message.schema.ts
+├── schemas/                  # Zod schema definitions
+│   ├── zodSetup.ts           # Zod configuration
+│   ├── agent.schema.ts       # Agent schemas
 │   ├── conversation.schema.ts
-│   └── requests.schema.ts
-├── routes/           # API route definitions
-│   └── agents/
-│       └── index.ts
-│   └── conversations/
-│       └── index.ts
-│   └── messages/
-│       └── index.ts
-│   └── common.ts     # Common route types
-└── generateDocs.ts   # Documentation generator
+│   ├── message.schema.ts
+│   ├── pagination.schema.ts
+│   └── route-params.schema.ts
+├── routes/                   # API route definitions
+│   ├── agents/
+│   │   └── index.ts
+│   ├── conversations/
+│   │   └── index.ts
+│   └── common.ts             # Common route types & error responses
+└── generateDocs.ts           # Documentation generator
 ```
 
-## 🔄 Updating the Documentation
+## 🔄 Publishing Updates
 
 1. Make changes to the schemas or routes
 2. Run `npm run generate-docs` to regenerate the documentation
 3. Run `npm start` and confirm your changes are correct
-4. Commit and push your changes
-5. The documentation will be automatically deployed via GitHub Actions
+4. Release new version
+
+```
+npm run release:patch  # For bug fixes
+npm run release:minor  # For new features
+npm run release:major  # For breaking changes
+```
 
 ## 🤝 Contributing
 

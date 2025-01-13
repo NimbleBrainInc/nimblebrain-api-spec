@@ -5,12 +5,15 @@ import {
   CreateMessageSchema,
   createPaginatedResponseSchema,
   getPaginationParams,
+  getRouteParams,
   MessageSchema,
 } from "../../schemas";
 import { z } from "../../schemas/zodSetup";
-import { authErrorResponses, routeParams } from "../common";
+import { authErrorResponses } from "../common";
 
 export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
+  const routeParams = getRouteParams(registry);
+
   // GET /agents/:agentUuid/conversations
   registry.registerPath({
     method: "get",
@@ -87,7 +90,7 @@ export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
     method: "get",
     path: "/agents/{agentUuid}/conversations/{conversationUuid}",
     security: [{ bearerAuth: [] }],
-    summary: "Retrieves a single conversation",
+    summary: "Retrieves a conversation",
     tags: ["Conversations"],
     parameters: [
       ...routeParams.agent,

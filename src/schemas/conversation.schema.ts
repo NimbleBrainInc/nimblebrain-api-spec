@@ -11,4 +11,11 @@ export const ConversationSchema = z
   })
   .openapi("Conversation");
 
+export const ConversationParamsSchema = z
+  .object({
+    conversationUuid: z.string().uuid(),
+  })
+  .openapi("ConversationParams");
+
 export type Conversation = z.infer<typeof ConversationSchema>;
+export type ConversationParams = z.infer<typeof ConversationParamsSchema>;

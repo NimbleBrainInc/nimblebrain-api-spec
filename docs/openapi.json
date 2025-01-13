@@ -42,6 +42,30 @@
           "limit"
         ]
       },
+      "AgentParams": {
+        "type": "object",
+        "properties": {
+          "agentUuid": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "agentUuid"
+        ]
+      },
+      "ConversationParams": {
+        "type": "object",
+        "properties": {
+          "conversationUuid": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "conversationUuid"
+        ]
+      },
       "Agent": {
         "type": "object",
         "properties": {
@@ -322,8 +346,7 @@
             "required": true,
             "description": "UUID of the agent",
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/AgentParams/properties/agentUuid"
             }
           },
           {
@@ -427,8 +450,7 @@
             "required": true,
             "description": "UUID of the agent",
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/AgentParams/properties/agentUuid"
             }
           }
         ],
@@ -516,7 +538,7 @@
             "bearerAuth": []
           }
         ],
-        "summary": "Retrieves a single conversation",
+        "summary": "Retrieves a conversation",
         "tags": [
           "Conversations"
         ],
@@ -527,8 +549,7 @@
             "required": true,
             "description": "UUID of the agent",
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/AgentParams/properties/agentUuid"
             }
           },
           {
@@ -537,8 +558,7 @@
             "required": true,
             "description": "UUID of the conversation",
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/ConversationParams/properties/conversationUuid"
             }
           },
           {
@@ -642,8 +662,7 @@
             "required": true,
             "description": "UUID of the agent",
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/AgentParams/properties/agentUuid"
             }
           },
           {
@@ -652,8 +671,7 @@
             "required": true,
             "description": "UUID of the conversation",
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/ConversationParams/properties/conversationUuid"
             }
           }
         ],
@@ -736,8 +754,7 @@
             "required": true,
             "description": "UUID of the agent",
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/AgentParams/properties/agentUuid"
             }
           },
           {
@@ -746,8 +763,7 @@
             "required": true,
             "description": "UUID of the conversation",
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/ConversationParams/properties/conversationUuid"
             }
           },
           {
@@ -833,8 +849,7 @@
             "required": true,
             "description": "UUID of the agent",
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/AgentParams/properties/agentUuid"
             }
           },
           {
@@ -843,8 +858,7 @@
             "required": true,
             "description": "UUID of the conversation",
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/ConversationParams/properties/conversationUuid"
             }
           }
         ],

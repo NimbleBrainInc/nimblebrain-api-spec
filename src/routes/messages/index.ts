@@ -4,10 +4,13 @@ import {
   MessageSchema,
   createPaginatedResponseSchema,
   getPaginationParams,
+  getRouteParams,
 } from "../../schemas";
-import { authErrorResponses, routeParams } from "../common";
+import { authErrorResponses } from "../common";
 
 export const registerMessageRoutes = (registry: OpenAPIRegistry) => {
+  const routeParams = getRouteParams(registry);
+
   // GET /agents/:agentUuid/conversations/:conversationUuid/messages
   registry.registerPath({
     method: "get",

@@ -7,4 +7,11 @@ export const AgentSchema = z
   })
   .openapi("Agent");
 
+export const AgentParamsSchema = z
+  .object({
+    agentUuid: z.string().uuid(),
+  })
+  .openapi("AgentParams");
+
 export type Agent = z.infer<typeof AgentSchema>;
+export type AgentParams = z.infer<typeof AgentParamsSchema>;

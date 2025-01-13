@@ -22,30 +22,3 @@ export const authErrorResponses = {
     },
   },
 };
-
-export const routeParams = {
-  agent: [
-    {
-      name: "agentUuid",
-      in: "path" as const,
-      required: true,
-      description: "UUID of the agent",
-      schema: {
-        type: "string" as const,
-        format: "uuid" as const,
-      },
-    },
-  ],
-  conversation: [
-    {
-      name: "conversationUuid",
-      in: "path" as const,
-      required: true,
-      description: "UUID of the conversation",
-      schema: {
-        type: "string" as const,
-        format: "uuid" as const,
-      },
-    },
-  ],
-} as const;
