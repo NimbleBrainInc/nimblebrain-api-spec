@@ -2,8 +2,14 @@ import { z } from "./zodSetup";
 
 export const PaginationQuerySchema = z
   .object({
-    page: z.number().default(1),
-    limit: z.number().default(10),
+    page: z
+      .string()
+      .default("1")
+      .transform((val) => Number(val)),
+    limit: z
+      .string()
+      .default("10")
+      .transform((val) => Number(val)),
   })
   .openapi("Message");
 
