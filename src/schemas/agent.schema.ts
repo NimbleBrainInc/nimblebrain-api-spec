@@ -9,7 +9,7 @@ export const AgentSchema = z
 
 export const AgentParamsSchema = z
   .object({
-    agentUuid: z.string().uuid(),
+    agentId: z.string().uuid(),
   })
   .openapi("AgentParams");
 

@@ -13,7 +13,7 @@ export const ConversationSchema = z
 
 export const ConversationParamsSchema = z
   .object({
-    conversationUuid: z.string().uuid(),
+    conversationId: z.string().uuid(),
   })
   .openapi("ConversationParams");
 

@@ -14,10 +14,10 @@ export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
   const routeParams = getRouteParams(registry);
   const standardErrors = registerCommonSchemas(registry);
 
-  // GET /agents/:agentUuid/conversations
+  // GET /agents/:agentId/conversations
   registry.registerPath({
     method: "get",
-    path: "/agents/{agentUuid}/conversations",
+    path: "/agents/{agentId}/conversations",
     security: [{ bearerAuth: [] }],
     summary: "List agent conversations",
     tags: ["Conversations"],
@@ -35,10 +35,10 @@ export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
     },
   });
 
-  // POST /agents/:agentUuid/conversations
+  // POST /agents/:agentId/conversations
   registry.registerPath({
     method: "post",
-    path: "/agents/{agentUuid}/conversations",
+    path: "/agents/{agentId}/conversations",
     security: [{ bearerAuth: [] }],
     summary: "Create a new conversation",
     tags: ["Conversations"],
@@ -65,18 +65,14 @@ export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
     },
   });
 
-  // GET /agents/:agentUuid/conversations/:conversationUuid
+  // GET /agents/:agentId/conversations/:conversationId
   registry.registerPath({
     method: "get",
-    path: "/agents/{agentUuid}/conversations/{conversationUuid}",
+    path: "/agents/{agentId}/conversations/{conversationId}",
     security: [{ bearerAuth: [] }],
     summary: "Retrieves a conversation",
     tags: ["Conversations"],
-    parameters: [
-      ...routeParams.agent,
-      ...routeParams.conversation,
-      ...getPaginationParams(registry),
-    ],
+    parameters: [...routeParams.agent, ...routeParams.conversation],
     responses: {
       200: {
         description: "Conversation retrieved successfully",
@@ -90,10 +86,10 @@ export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
     },
   });
 
-  // GET /agents/:agentUuid/conversations/:conversationUuid/messages
+  // GET /agents/:agentId/conversations/:conversationId/messages
   registry.registerPath({
     method: "get",
-    path: "/agents/{agentUuid}/conversations/{conversationUuid}/messages",
+    path: "/agents/{agentId}/conversations/{conversationId}/messages",
     security: [{ bearerAuth: [] }],
     summary: "List conversation messages",
     tags: ["Messages"],
@@ -115,10 +111,10 @@ export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
     },
   });
 
-  // POST /agents/:agentUuid/conversations/:conversationUuid/messages
+  // POST /agents/:agentId/conversations/:conversationId/messages
   registry.registerPath({
     method: "post",
-    path: "/agents/{agentUuid}/conversations/{conversationUuid}/messages",
+    path: "/agents/{agentId}/conversations/{conversationId}/messages",
     security: [{ bearerAuth: [] }],
     summary: "Add a message to conversation",
     tags: ["Messages"],
@@ -145,10 +141,10 @@ export const registerConversationRoutes = (registry: OpenAPIRegistry) => {
     },
   });
 
-  // DELETE /agents/:agentUuid/conversations/:conversationUuid
+  // DELETE /agents/:agentId/conversations/:conversationId
   registry.registerPath({
     method: "delete",
-    path: "/agents/{agentUuid}/conversations/{conversationUuid}",
+    path: "/agents/{agentId}/conversations/{conversationId}",
     security: [{ bearerAuth: [] }],
     summary: "Delete a conversation",
     tags: ["Conversations"],

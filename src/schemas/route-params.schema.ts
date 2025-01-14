@@ -8,20 +8,20 @@ export const getRouteParams = (registry: OpenAPIRegistry) => {
   return {
     agent: [
       {
-        name: "agentUuid",
+        name: "agentId",
         in: "path" as const,
         required: true,
         description: "UUID of the agent",
-        schema: { $ref: "#/components/schemas/AgentParams/properties/agentUuid" },
+        schema: { $ref: "#/components/schemas/AgentParams/properties/agentId" },
       },
     ],
     conversation: [
       {
-        name: "conversationUuid",
+        name: "conversationId",
         in: "path" as const,
         required: true,
         description: "UUID of the conversation",
-        schema: { $ref: "#/components/schemas/ConversationParams/properties/conversationUuid" },
+        schema: { $ref: "#/components/schemas/ConversationParams/properties/conversationId" },
       },
     ],
   } as const;

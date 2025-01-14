@@ -109,25 +109,25 @@
       "AgentParams": {
         "type": "object",
         "properties": {
-          "agentUuid": {
+          "agentId": {
             "type": "string",
             "format": "uuid"
           }
         },
         "required": [
-          "agentUuid"
+          "agentId"
         ]
       },
       "ConversationParams": {
         "type": "object",
         "properties": {
-          "conversationUuid": {
+          "conversationId": {
             "type": "string",
             "format": "uuid"
           }
         },
         "required": [
-          "conversationUuid"
+          "conversationId"
         ]
       },
       "Agent": {
@@ -839,7 +839,7 @@
         }
       }
     },
-    "/agents/{agentUuid}/conversations": {
+    "/agents/{agentId}/conversations": {
       "get": {
         "security": [
           {
@@ -852,12 +852,12 @@
         ],
         "parameters": [
           {
-            "name": "agentUuid",
+            "name": "agentId",
             "in": "path",
             "required": true,
             "description": "UUID of the agent",
             "schema": {
-              "$ref": "#/components/schemas/AgentParams/properties/agentUuid"
+              "$ref": "#/components/schemas/AgentParams/properties/agentId"
             }
           },
           {
@@ -1382,12 +1382,12 @@
         ],
         "parameters": [
           {
-            "name": "agentUuid",
+            "name": "agentId",
             "in": "path",
             "required": true,
             "description": "UUID of the agent",
             "schema": {
-              "$ref": "#/components/schemas/AgentParams/properties/agentUuid"
+              "$ref": "#/components/schemas/AgentParams/properties/agentId"
             }
           }
         ],
@@ -1847,7 +1847,7 @@
         }
       }
     },
-    "/agents/{agentUuid}/conversations/{conversationUuid}": {
+    "/agents/{agentId}/conversations/{conversationId}": {
       "get": {
         "security": [
           {
@@ -1860,37 +1860,21 @@
         ],
         "parameters": [
           {
-            "name": "agentUuid",
+            "name": "agentId",
             "in": "path",
             "required": true,
             "description": "UUID of the agent",
             "schema": {
-              "$ref": "#/components/schemas/AgentParams/properties/agentUuid"
+              "$ref": "#/components/schemas/AgentParams/properties/agentId"
             }
           },
           {
-            "name": "conversationUuid",
+            "name": "conversationId",
             "in": "path",
             "required": true,
             "description": "UUID of the conversation",
             "schema": {
-              "$ref": "#/components/schemas/ConversationParams/properties/conversationUuid"
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/PaginationQuery/properties/page"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/PaginationQuery/properties/limit"
+              "$ref": "#/components/schemas/ConversationParams/properties/conversationId"
             }
           }
         ],
@@ -2352,21 +2336,21 @@
         ],
         "parameters": [
           {
-            "name": "agentUuid",
+            "name": "agentId",
             "in": "path",
             "required": true,
             "description": "UUID of the agent",
             "schema": {
-              "$ref": "#/components/schemas/AgentParams/properties/agentUuid"
+              "$ref": "#/components/schemas/AgentParams/properties/agentId"
             }
           },
           {
-            "name": "conversationUuid",
+            "name": "conversationId",
             "in": "path",
             "required": true,
             "description": "UUID of the conversation",
             "schema": {
-              "$ref": "#/components/schemas/ConversationParams/properties/conversationUuid"
+              "$ref": "#/components/schemas/ConversationParams/properties/conversationId"
             }
           }
         ],
@@ -2810,7 +2794,7 @@
         }
       }
     },
-    "/agents/{agentUuid}/conversations/{conversationUuid}/messages": {
+    "/agents/{agentId}/conversations/{conversationId}/messages": {
       "get": {
         "security": [
           {
@@ -2823,21 +2807,21 @@
         ],
         "parameters": [
           {
-            "name": "agentUuid",
+            "name": "agentId",
             "in": "path",
             "required": true,
             "description": "UUID of the agent",
             "schema": {
-              "$ref": "#/components/schemas/AgentParams/properties/agentUuid"
+              "$ref": "#/components/schemas/AgentParams/properties/agentId"
             }
           },
           {
-            "name": "conversationUuid",
+            "name": "conversationId",
             "in": "path",
             "required": true,
             "description": "UUID of the conversation",
             "schema": {
-              "$ref": "#/components/schemas/ConversationParams/properties/conversationUuid"
+              "$ref": "#/components/schemas/ConversationParams/properties/conversationId"
             }
           },
           {
@@ -3362,21 +3346,21 @@
         ],
         "parameters": [
           {
-            "name": "agentUuid",
+            "name": "agentId",
             "in": "path",
             "required": true,
             "description": "UUID of the agent",
             "schema": {
-              "$ref": "#/components/schemas/AgentParams/properties/agentUuid"
+              "$ref": "#/components/schemas/AgentParams/properties/agentId"
             }
           },
           {
-            "name": "conversationUuid",
+            "name": "conversationId",
             "in": "path",
             "required": true,
             "description": "UUID of the conversation",
             "schema": {
-              "$ref": "#/components/schemas/ConversationParams/properties/conversationUuid"
+              "$ref": "#/components/schemas/ConversationParams/properties/conversationId"
             }
           }
         ],

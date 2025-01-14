@@ -12,10 +12,10 @@ export const registerMessageRoutes = (registry: OpenAPIRegistry) => {
   const routeParams = getRouteParams(registry);
   const standardErrors = registerCommonSchemas(registry);
 
-  // GET /agents/:agentUuid/conversations/:conversationUuid/messages
+  // GET /agents/:agentId/conversations/:conversationId/messages
   registry.registerPath({
     method: "get",
-    path: "/agents/{agentUuid}/conversations/{conversationUuid}/messages",
+    path: "/agents/{agentId}/conversations/{conversationId}/messages",
     security: [{ bearerAuth: [] }],
     summary: "List conversation messages",
     tags: ["Messages"],
@@ -37,10 +37,10 @@ export const registerMessageRoutes = (registry: OpenAPIRegistry) => {
     },
   });
 
-  // POST /agents/:agentUuid/conversations/:conversationUuid/messages
+  // POST /agents/:agentId/conversations/:conversationId/messages
   registry.registerPath({
     method: "post",
-    path: "/agents/{agentUuid}/conversations/{conversationUuid}/messages",
+    path: "/agents/{agentId}/conversations/{conversationId}/messages",
     security: [{ bearerAuth: [] }],
     summary: "Add a message to conversation",
     tags: ["Messages"],

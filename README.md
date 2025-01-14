@@ -33,19 +33,19 @@ All endpoints require authentication using a Bearer token. To authenticate:
 ### Agents
 
 - `GET /agents` - List all agents (paginated)
-- `GET /agents/:agentUuid` - Get a specific agent
+- `GET /agents/:agentId` - Get a specific agent
 
 ### Conversations
 
-- `GET /agents/:agentUuid/conversations` - List agent conversations (paginated)
-- `POST /agents/:agentUuid/conversations` - Create a new conversation
-- `GET /agents/:agentUuid/conversations/:conversationUuid` - Get conversation details
-- `DELETE /agents/:agentUuid/conversations/:conversationUuid` - Delete a conversation
+- `GET /agents/:agentId/conversations` - List agent conversations (paginated)
+- `POST /agents/:agentId/conversations` - Create a new conversation
+- `GET /agents/:agentId/conversations/:conversationId` - Get conversation details
+- `DELETE /agents/:agentId/conversations/:conversationId` - Delete a conversation
 
 ### Messages
 
-- `GET /agents/:agentUuid/conversations/:conversationUuid/messages` - List conversation messages (paginated)
-- `POST /agents/:agentUuid/conversations/:conversationUuid/messages` - Add a message to a conversation
+- `GET /agents/:agentId/conversations/:conversationId/messages` - List conversation messages (paginated)
+- `POST /agents/:agentId/conversations/:conversationId/messages` - Add a message to a conversation
 
 ## Response formats
 
