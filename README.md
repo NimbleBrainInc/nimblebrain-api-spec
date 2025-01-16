@@ -171,15 +171,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📮 Support
 
 For support, please reach out to our team at support@nimblebrain.ai
-
-For nimblebrain run:
-
-```
-git remote set-url origin git@github.com:NimbleBrainInc/nimblebrain.git
-```
-
-For gloader run:
-
-```
-git remote set-url origin git@github.com:NimbleBrainInc/gloader.git
-```
