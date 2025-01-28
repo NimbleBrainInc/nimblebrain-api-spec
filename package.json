@@ -16,8 +16,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "npx rimraf dist",
-    "prepare": "npm run build",
     "generate-docs": "ts-node src/generateDocs.ts",
+    "prestart": "npm run clean && npm run generate-docs && npm run build",
     "start": "http-server ./docs -p 9000",
     "version": "git add -A",
     "postversion": "git push && git push --tags",

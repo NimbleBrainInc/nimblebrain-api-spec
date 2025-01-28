@@ -4,6 +4,7 @@ export const AgentSchema = z
   .object({
     id: z.string().uuid(),
     title: z.string(),
+    avatarUrl: z.string().url().optional(),
   })
   .openapi("Agent");
 
