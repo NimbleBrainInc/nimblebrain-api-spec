@@ -6,13 +6,13 @@ export const PaginationQuerySchema = z
     page: z
       .string()
       .optional()
-      .refine((val) => !val || !isNaN(Number(val)), "Page must be a valid number")
-      .transform((val) => Number(val ?? 1)),
+      .transform((val) => Number(val ?? "1"))
+      .pipe(z.number().min(1)),
     limit: z
       .string()
       .optional()
-      .refine((val) => !val || !isNaN(Number(val)), "Limit must be a valid number")
-      .transform((val) => Number(val ?? 10)),
+      .transform((val) => Number(val ?? "10"))
+      .pipe(z.number().min(1)),
   })
   .openapi("PaginationQuery");
 
