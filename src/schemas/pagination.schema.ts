@@ -8,23 +8,26 @@ export const PaginationQuerySchema = z
         z.number(),
         z
           .string()
-          .regex(/^\d+$/, "Page must be a valid number") // Only allows digits
+          .regex(/^\d+$/, "Page must be a valid number")
           .transform((val) => parseInt(val, 10)),
       ])
-      .refine((val) => val > 0, "Page must be greater than 0"), // Ensures positive number
+      .refine((val) => val > 0, "Page must be greater than 0")
+      .optional()
+      .default(1),
 
     limit: z
       .union([
         z.number(),
         z
           .string()
-          .regex(/^\d+$/, "Limit must be a valid number") // Only allows digits
+          .regex(/^\d+$/, "Limit must be a valid number")
           .transform((val) => parseInt(val, 10)),
       ])
-      .refine((val) => val > 0, "Limit must be greater than 0"), // Ensures positive number
+      .refine((val) => val > 0, "Limit must be greater than 0")
+      .optional()
+      .default(10),
   })
   .openapi("PaginationQuery");
-
 export type PaginationQuery = z.infer<typeof PaginationQuerySchema>;
 
 // Helper function to get pagination parameters
