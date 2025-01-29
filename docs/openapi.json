@@ -117,16 +117,26 @@
         "type": "object",
         "properties": {
           "page": {
-            "type": "integer",
-            "minimum": 0,
-            "exclusiveMinimum": true,
-            "default": 1
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string",
+                "pattern": "^\\d+$"
+              }
+            ]
           },
           "limit": {
-            "type": "integer",
-            "minimum": 0,
-            "exclusiveMinimum": true,
-            "default": 10
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string",
+                "pattern": "^\\d+$"
+              }
+            ]
           }
         },
         "required": [
@@ -165,16 +175,26 @@
             }
           },
           "page": {
-            "type": "integer",
-            "minimum": 0,
-            "exclusiveMinimum": true,
-            "default": 1
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string",
+                "pattern": "^\\d+$"
+              }
+            ]
           },
           "limit": {
-            "type": "integer",
-            "minimum": 0,
-            "exclusiveMinimum": true,
-            "default": 10
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string",
+                "pattern": "^\\d+$"
+              }
+            ]
           },
           "total": {
             "type": "integer",
@@ -253,16 +273,26 @@
             }
           },
           "page": {
-            "type": "integer",
-            "minimum": 0,
-            "exclusiveMinimum": true,
-            "default": 1
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string",
+                "pattern": "^\\d+$"
+              }
+            ]
           },
           "limit": {
-            "type": "integer",
-            "minimum": 0,
-            "exclusiveMinimum": true,
-            "default": 10
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string",
+                "pattern": "^\\d+$"
+              }
+            ]
           },
           "total": {
             "type": "integer",
@@ -298,16 +328,26 @@
             }
           },
           "page": {
-            "type": "integer",
-            "minimum": 0,
-            "exclusiveMinimum": true,
-            "default": 1
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string",
+                "pattern": "^\\d+$"
+              }
+            ]
           },
           "limit": {
-            "type": "integer",
-            "minimum": 0,
-            "exclusiveMinimum": true,
-            "default": 10
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string",
+                "pattern": "^\\d+$"
+              }
+            ]
           },
           "total": {
             "type": "integer",

@@ -3,8 +3,25 @@ import { z } from "./zodSetup";
 
 export const PaginationQuerySchema = z
   .object({
-    page: z.number().int().positive().default(1),
-    limit: z.number().int().positive().default(10),
+    page: z
+      .union([
+        z.number(),
+        z
+          .string()
+          .regex(/^\d+$/, "Page must be a valid number") // Only allows digits
+          .transform((val) => parseInt(val, 10)),
+      ])
+      .refine((val) => val > 0, "Page must be greater than 0"), // Ensures positive number
+
+    limit: z
+      .union([
+        z.number(),
+        z
+          .string()
+          .regex(/^\d+$/, "Limit must be a valid number") // Only allows digits
+          .transform((val) => parseInt(val, 10)),
+      ])
+      .refine((val) => val > 0, "Limit must be greater than 0"), // Ensures positive number
   })
   .openapi("PaginationQuery");
 
