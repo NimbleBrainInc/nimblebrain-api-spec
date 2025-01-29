@@ -4,19 +4,15 @@ import { z } from "./zodSetup";
 export const PaginationQuerySchema = z
   .object({
     page: z
-      .union([
-        z.number(),
-        z.string().refine((val) => !isNaN(Number(val)), "Page must be a valid number"),
-      ])
-      .default("1")
-      .transform((val) => Number(val)),
+      .string()
+      .optional()
+      .refine((val) => !val || !isNaN(Number(val)), "Page must be a valid number")
+      .transform((val) => Number(val ?? 1)),
     limit: z
-      .union([
-        z.number(),
-        z.string().refine((val) => !isNaN(Number(val)), "Limit must be a valid number"),
-      ])
-      .default("10")
-      .transform((val) => Number(val)),
+      .string()
+      .optional()
+      .refine((val) => !val || !isNaN(Number(val)), "Limit must be a valid number")
+      .transform((val) => Number(val ?? 10)),
   })
   .openapi("PaginationQuery");
 
