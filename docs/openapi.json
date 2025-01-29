@@ -117,32 +117,12 @@
         "type": "object",
         "properties": {
           "page": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "string",
-                "pattern": "^\\d+$"
-              }
-            ]
+            "type": "string"
           },
           "limit": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "string",
-                "pattern": "^\\d+$"
-              }
-            ]
+            "type": "string"
           }
-        },
-        "required": [
-          "page",
-          "limit"
-        ]
+        }
       },
       "Agent": {
         "type": "object",
@@ -175,26 +155,10 @@
             }
           },
           "page": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "string",
-                "pattern": "^\\d+$"
-              }
-            ]
+            "type": "string"
           },
           "limit": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "string",
-                "pattern": "^\\d+$"
-              }
-            ]
+            "type": "string"
           },
           "total": {
             "type": "integer",
@@ -203,8 +167,6 @@
         },
         "required": [
           "items",
-          "page",
-          "limit",
           "total"
         ]
       },
@@ -273,26 +235,10 @@
             }
           },
           "page": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "string",
-                "pattern": "^\\d+$"
-              }
-            ]
+            "type": "string"
           },
           "limit": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "string",
-                "pattern": "^\\d+$"
-              }
-            ]
+            "type": "string"
           },
           "total": {
             "type": "integer",
@@ -301,8 +247,6 @@
         },
         "required": [
           "items",
-          "page",
-          "limit",
           "total"
         ]
       },
@@ -328,26 +272,10 @@
             }
           },
           "page": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "string",
-                "pattern": "^\\d+$"
-              }
-            ]
+            "type": "string"
           },
           "limit": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "string",
-                "pattern": "^\\d+$"
-              }
-            ]
+            "type": "string"
           },
           "total": {
             "type": "integer",
@@ -356,8 +284,6 @@
         },
         "required": [
           "items",
-          "page",
-          "limit",
           "total"
         ]
       },
