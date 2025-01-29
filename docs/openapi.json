@@ -254,7 +254,8 @@
         "type": "object",
         "properties": {
           "text": {
-            "type": "string"
+            "type": "string",
+            "minLength": 2
           }
         },
         "required": [
@@ -291,7 +292,8 @@
         "type": "object",
         "properties": {
           "text": {
-            "type": "string"
+            "type": "string",
+            "minLength": 2
           }
         },
         "required": [
