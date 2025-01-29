@@ -117,12 +117,16 @@
         "type": "object",
         "properties": {
           "page": {
-            "type": "string",
-            "default": "1"
+            "type": "integer",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "default": 1
           },
           "limit": {
-            "type": "string",
-            "default": "10"
+            "type": "integer",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "default": 10
           }
         },
         "required": [
@@ -161,12 +165,16 @@
             }
           },
           "page": {
-            "type": "string",
-            "default": "1"
+            "type": "integer",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "default": 1
           },
           "limit": {
-            "type": "string",
-            "default": "10"
+            "type": "integer",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "default": 10
           },
           "total": {
             "type": "integer",
@@ -245,12 +253,16 @@
             }
           },
           "page": {
-            "type": "string",
-            "default": "1"
+            "type": "integer",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "default": 1
           },
           "limit": {
-            "type": "string",
-            "default": "10"
+            "type": "integer",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "default": 10
           },
           "total": {
             "type": "integer",
@@ -286,12 +298,16 @@
             }
           },
           "page": {
-            "type": "string",
-            "default": "1"
+            "type": "integer",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "default": 1
           },
           "limit": {
-            "type": "string",
-            "default": "10"
+            "type": "integer",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "default": 10
           },
           "total": {
             "type": "integer",
