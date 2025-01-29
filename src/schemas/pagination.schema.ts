@@ -4,28 +4,30 @@ import { z } from "./zodSetup";
 export const PaginationQuerySchema = z
   .object({
     page: z
-      .union([
-        z.number(),
-        z
-          .string()
-          .regex(/^\d+$/, "Page must be a valid number")
-          .transform((val) => parseInt(val, 10)),
-      ])
-      .refine((val) => val > 0, "Page must be greater than 0")
-      .optional()
-      .default(1),
+      .preprocess(
+        (val) => (val === undefined ? 1 : val),
+        z.union([
+          z.number(),
+          z
+            .string()
+            .regex(/^\d+$/, "Page must be a valid number")
+            .transform((val) => parseInt(val, 10)),
+        ])
+      )
+      .refine((val) => val > 0, "Page must be greater than 0"),
 
     limit: z
-      .union([
-        z.number(),
-        z
-          .string()
-          .regex(/^\d+$/, "Limit must be a valid number")
-          .transform((val) => parseInt(val, 10)),
-      ])
-      .refine((val) => val > 0, "Limit must be greater than 0")
-      .optional()
-      .default(10),
+      .preprocess(
+        (val) => (val === undefined ? 10 : val),
+        z.union([
+          z.number(),
+          z
+            .string()
+            .regex(/^\d+$/, "Limit must be a valid number")
+            .transform((val) => parseInt(val, 10)),
+        ])
+      )
+      .refine((val) => val > 0, "Limit must be greater than 0"),
   })
   .openapi("PaginationQuery");
 export type PaginationQuery = z.infer<typeof PaginationQuerySchema>;
