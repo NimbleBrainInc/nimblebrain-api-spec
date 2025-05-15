@@ -49,6 +49,7 @@ export const ErrorCode = {
   // Rate limiting/quotas (400s)
   RATE_LIMIT_EXCEEDED: "RATE_LIMIT_EXCEEDED",
   QUOTA_EXCEEDED: "QUOTA_EXCEEDED",
+  PAYMENT_REQUIRED: "PAYMENT_REQUIRED",
 
   // Server errors (500s)
   INTERNAL_ERROR: "INTERNAL_ERROR",
@@ -81,6 +82,9 @@ export const errorCodeToStatus: Record<ErrorCodeType, number> = {
   UNAUTHORIZED: 401,
   INVALID_CREDENTIALS: 401,
   TOKEN_EXPIRED: 401,
+
+  // 402s
+  PAYMENT_REQUIRED: 402,
 
   // 403s
   FORBIDDEN: 403,

@@ -103,6 +103,7 @@
           "INVALID_FORMAT",
           "RATE_LIMIT_EXCEEDED",
           "QUOTA_EXCEEDED",
+          "PAYMENT_REQUIRED",
           "INTERNAL_ERROR",
           "SERVICE_UNAVAILABLE",
           "DATABASE_ERROR",
